@@ -1,90 +1,68 @@
 class ProductDetailsPage {
+  // =========================
+  // Selectors
+  // =========================
+  selectors = {
+    loggedInUser: "#nameofuser",
+    productName: ".name",
+    productPrice: ".price-container",
+    productDescription: "#more-information",
+    addToCartButton: "a",
+    cartLink: "#cartur",
+  };
 
-    // =========================
-    // Selectors
-    // =========================
-    selectors = {
-        loggedInUser: '#nameofuser',
-        productName: '.name',
-        productPrice: '.price-container',
-        productDescription: '#more-information',
-        addToCartButton: 'a',
-        cartLink: '#cartur'
-    };
+  // =========================
+  // Locators
+  // =========================
+  getLoggedInUser() {
+    return cy.get(this.selectors.loggedInUser);
+  }
 
+  getProductName() {
+    return cy.get(this.selectors.productName);
+  }
 
-    // =========================
-    // Locators
-    // =========================
-    getLoggedInUser() {
-        return cy.get(this.selectors.loggedInUser);
-    }
+  getProductPrice() {
+    return cy.get(this.selectors.productPrice);
+  }
 
-    getProductName() {
-        return cy.get(this.selectors.productName);
-    }
+  getProductDescription() {
+    return cy.get(this.selectors.productDescription);
+  }
 
-    getProductPrice() {
-        return cy.get(this.selectors.productPrice);
-    }
+  getAddToCartButton() {
+    return cy.contains(this.selectors.addToCartButton, "Add to cart");
+  }
 
-    getProductDescription() {
-        return cy.get(this.selectors.productDescription);
-    }
+  getCartLink() {
+    return cy.get(this.selectors.cartLink);
+  }
 
-    getAddToCartButton() {
-        return cy.contains(
-            this.selectors.addToCartButton,
-            'Add to cart'
-        );
-    }
+  // =========================
+  // Actions / Verifications
+  // =========================
+  verifyLoggedInUser(expectedUsername) {
+    this.getLoggedInUser().should(
+      "contain.text",
+      `Welcome ${expectedUsername} `,
+    );
+  }
 
-    getCartLink() {
-        return cy.get(this.selectors.cartLink);
-    }
+  verifyProductDetails(productName, productPrice, productDescription) {
+    this.getProductName().should("have.text", productName);
 
+    this.getProductPrice().should("contain.text", productPrice);
 
-    // =========================
-    // Actions / Verifications
-    // =========================
-    verifyLoggedInUser(expectedUsername) {
+    this.getProductDescription().should("contain.text", productDescription);
+  }
 
-        this.getLoggedInUser()
-            .should(
-                'contain.text',
-                `Welcome ${expectedUsername} `
-            );
-    }
+  clickAddToCart() {
+    this.getAddToCartButton().click();
+  }
 
-    verifyProductDetails(
-        productName,
-        productPrice,
-        productDescription
-    ) {
-
-        this.getProductName()
-            .should('have.text', productName);
-
-        this.getProductPrice()
-            .should('contain.text', productPrice);
-
-        this.getProductDescription()
-            .should('contain.text', productDescription);
-    }
-
-    clickAddToCart() {
-
-        this.getAddToCartButton()
-            .click();
-    }
-
-    clickCartLink() {
-
-        this.getCartLink()
-            .click();
-    }
-
-
+  clickCartLink() {
+    this.getCartLink().click();
+  }
 }
 
 export default new ProductDetailsPage();

@@ -2,24 +2,23 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://www.demoblaze.com',
+    baseUrl: "https://www.demoblaze.com",
     experimentalSessionAndOrigin: true,
-    supportFile: 'cypress/support/e2e.js',
-    specPattern: 'cypress/e2e/*.cy.js',
+    supportFile: "cypress/support/e2e.js",
+    specPattern: "cypress/e2e/*.cy.js",
 
-    reporter: 'cypress-mochawesome-reporter',
+    reporter: "cypress-mochawesome-reporter",
     reporterOptions: {
-      reportDir: 'cypress/reports',
+      reportDir: "cypress/reports",
       charts: true,
       overwrite: false,
       html: true,
-      json: true
+      json: true,
     },
 
     setupNodeEvents(on, config) {
-      require('cypress-mochawesome-reporter/plugin')(on);
+      require("cypress-mochawesome-reporter/plugin")(on);
       return config;
     },
   },
 });
-
