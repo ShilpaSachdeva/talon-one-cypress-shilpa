@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('stubAlert', (alias = 'alert') => {
+  cy.window().then(win => cy.stub(win, 'alert').as(alias));
+});
+
+Cypress.Commands.add('shouldHaveAlert', (expected, alias = 'alert') => {
+  cy.get(`@${alias}`).should('have.been.calledWith', expected);
+});

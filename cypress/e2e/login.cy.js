@@ -1,22 +1,40 @@
-describe('Login', () => {
-  it('should login with valid credentials', () => {
-    cy.visit('https://www.demoblaze.com')
+import LoginPage from '../pages/LoginPage';
+import ProductDetails from '../pages/ProductsPage';
+import user from '../fixtures/users.json';
 
-    cy.get('#login2').should('be.visible').click()
+describe('Login Flow', () => {
 
-    cy.get('#loginusername')
-      .should('be.visible')
-      .type('talonqa_shilpa', { delay: 300 })
+  it('should log in successfully with valid credentials', () => {
+    LoginPage.openLoginModal();
+    LoginPage.fillUsername(user.validUser.username);
+    LoginPage.fillPassword(user.validUser.password);
+    LoginPage.clickLogin();
+    ProductDetails.verifyLoggedInUser(user.validUser.username);
+  });
 
-    cy.get('#loginpassword')
-      .should('be.visible')
-      .type('Dummy@123', { delay: 300 })
+  it('should not be able to login with unregistered user / invalid username', () => {
+    LoginPage.openLoginModal();
+    LoginPage.fillUsername(user.invalidUser.username);
+    LoginPage.fillPassword(user.invalidUser.password);
+    cy.stubAlert();
+    LoginPage.clickLogin();
+    cy.shouldHaveAlert('User does not exist.');
+  });
 
-    cy.contains('button', 'Log in')
-      .should('be.visible')
-      .click()
+  it('should not be able to login with blank username and blank password', () => {
+    LoginPage.openLoginModal();
+    cy.stubAlert();
+    LoginPage.clickLogin();
+    cy.shouldHaveAlert('Please fill out Username and Password.');
+  });
 
-    cy.contains(`Welcome talonqa_shilpa`)
-      .should('be.visible')
+  it('should not be able to login with invalid password', () => {
+    LoginPage.openLoginModal();
+    LoginPage.fillUsername(user.validUser.username);
+    LoginPage.fillPassword(user.invalidUser.password);
+    cy.stubAlert();
+    LoginPage.clickLogin();
+    cy.shouldHaveAlert('Wrong password.');
   })
-})
+
+});

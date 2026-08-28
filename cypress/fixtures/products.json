@@ -1,0 +1,16 @@
+{
+    "Products": {
+        "Phones": [
+            {
+                "name": "Samsung galaxy s6"
+            }
+        ],
+        "Laptops": [
+            {
+                "name": "MacBook air",
+                "price": "$700",
+                "description": "1.6GHz dual-core Intel Core i5 (Turbo Boost up to 2.7GHz) with 3MB"
+            }
+        ]
+    }
+}
