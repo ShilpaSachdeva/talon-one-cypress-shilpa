@@ -277,6 +277,7 @@ The test scenarios and framework structure were designed based on the applicatio
 AI was mainly used for:
 
 * Supporting the implementation of browser alert stubbing and assertions.
+* Fixing some flaky tests.
 * Improving code readability and formatting.
 * Reviewing and refining the README documentation.
 
