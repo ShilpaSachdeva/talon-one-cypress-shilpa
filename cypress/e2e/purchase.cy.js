@@ -8,7 +8,6 @@ import orderDetails from "../fixtures/orderDetails.json";
 
 describe("Product Purchase Flow ", () => {
   beforeEach(() => {
-    cy.visit("/");
     login.login(users.validUser.username, users.validUser.password);
   });
 
