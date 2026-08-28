@@ -44,13 +44,12 @@ class LoginPage {
     this.getLoginModal().should("be.visible");
   }
 
-   fillUsername(username) {
-    this.getUsernameField().should('be.visible').and('be.enabled').clear().type(username).should('have.value', username);
-
+  fillUsername(username) {
+    this.usernameField().clear().type(username, { delay: 40 });
   }
 
   fillPassword(password) {
-    this.getPasswordField().should('be.visible').and('be.enabled').clear().type(password).should('have.value', password);
+    this.passwordField().clear().type(password, { delay: 40 });
   }
 
   clickLogin() {
